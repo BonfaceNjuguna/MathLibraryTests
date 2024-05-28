@@ -26,6 +26,6 @@ namespace MathClasses
         bool operator==(const Colour& other) const;
         bool operator!=(const Colour& other) const;
 
-        uint32_t colour;
+        uint32_t colour; 
     };
 }
