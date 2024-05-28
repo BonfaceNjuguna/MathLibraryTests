@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="Colour.cpp" />
     <ClCompile Include="ColourTests.cpp" />
+    <ClCompile Include="Matrix3.cpp" />
     <ClCompile Include="Matrix3Tests.cpp" />
     <ClCompile Include="Matrix3TransformTests.cpp" />
     <ClCompile Include="Matrix4Tests.cpp" />
