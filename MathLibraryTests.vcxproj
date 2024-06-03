@@ -165,6 +165,7 @@
     <ClCompile Include="Matrix3.cpp" />
     <ClCompile Include="Matrix3Tests.cpp" />
     <ClCompile Include="Matrix3TransformTests.cpp" />
+    <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Matrix4Tests.cpp" />
     <ClCompile Include="Matrix4TransformTests.cpp" />
     <ClCompile Include="Vector3.cpp" />

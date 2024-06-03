@@ -41,36 +41,57 @@ namespace MathLibraryTests
 		{
 			Matrix3 actual = Matrix3::MakeRotateX(3.98f);
 
-			Assert::AreEqual(
+			Matrix3 expected(
+				1, 0, 0,
+				0, -0.668648f, 0.743579f,
+				0, -0.743579f, -0.668648f);
+
+			Assert::IsTrue(expected.Equals(actual));
+
+			/*Assert::AreEqual(
 				Matrix3(
 					1, 0, 0,
 					0, -0.668648f, 0.743579f,
 					0, -0.743579f, -0.668648f),
-				actual);
+				actual);*/
 		}
 		// make rotY from float
 		TEST_METHOD(MakeRotateYFloat)
 		{
 			Matrix3 actual = Matrix3::MakeRotateY(1.76f);
 
-			Assert::AreEqual(
+			Matrix3 expected(
+				-0.188077f, 0, 0.982154f,
+				0, 1, 0,
+				-0.982154f, 0, -0.188077f);
+
+			Assert::IsTrue(expected.Equals(actual));
+
+			/*Assert::AreEqual(
 				Matrix3(
 					-0.188077f, 0, 0.982154f,
 					0, 1, 0,
 					-0.982154f, 0, -0.188077f),
-				actual);
+				actual);*/
 		}
 		// make rotZ from float
 		TEST_METHOD(MakeRotateZFloat)
 		{
 			Matrix3 actual = Matrix3::MakeRotateZ(9.62f);
 
-			Assert::AreEqual(
+			Matrix3 expected(
+				-0.981005f, -0.193984f, 0,
+				0.193984f, -0.981005f, 0,
+				0, 0, 1);
+
+			Assert::IsTrue(expected.Equals(actual));
+
+			/*Assert::AreEqual(
 				Matrix3(
 					-0.981005f, -0.193984f, 0,
 					0.193984f, -0.981005f, 0,
 					0, 0, 1),
-				actual);
+				actual);*/
 		}
 		// make rot from euler (floats)
 		TEST_METHOD(MakeRotateEulerFloat)

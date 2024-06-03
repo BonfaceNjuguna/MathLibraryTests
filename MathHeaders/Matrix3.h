@@ -68,5 +68,7 @@ namespace MathClasses
 
         // Equality operator
         bool operator==(const Matrix3& rhs) const;
+
+        bool Equals(const Matrix3& rhs, float epsilon = 1e-5f) const;
 	};
 }

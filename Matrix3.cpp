@@ -79,16 +79,16 @@ namespace MathClasses {
     void Matrix3::SetRotateX(double radians) {
         Set(
             1, 0, 0,
-            0, (float)std::cos(radians), (float)std::sin(radians),
-            0, -(float)std::sin(radians), (float)std::cos(radians)
+            0, (float)std::cos(radians), -(float)std::sin(radians),
+            0, (float)std::sin(radians), (float)std::cos(radians)
         );
     }
 
     void Matrix3::SetRotateY(double radians) {
         Set(
-            (float)std::cos(radians), 0, -(float)std::sin(radians),
+            (float)std::cos(radians), 0, (float)std::sin(radians),
             0, 1, 0,
-            (float)std::sin(radians), 0, (float)std::cos(radians)
+            -(float)std::sin(radians), 0, (float)std::cos(radians)
         );
     }
 
@@ -231,5 +231,18 @@ namespace MathClasses {
         return m1 == rhs.m1 && m2 == rhs.m2 && m3 == rhs.m3 &&
             m4 == rhs.m4 && m5 == rhs.m5 && m6 == rhs.m6 &&
             m7 == rhs.m7 && m8 == rhs.m8 && m9 == rhs.m9;
+    }
+
+    // eplison for float comparison
+    bool Matrix3::Equals(const Matrix3& rhs, float epsilon) const {
+        return (std::fabs(m1 - rhs.m1) < epsilon) &&
+            (std::fabs(m2 - rhs.m2) < epsilon) &&
+            (std::fabs(m3 - rhs.m3) < epsilon) &&
+            (std::fabs(m4 - rhs.m4) < epsilon) &&
+            (std::fabs(m5 - rhs.m5) < epsilon) &&
+            (std::fabs(m6 - rhs.m6) < epsilon) &&
+            (std::fabs(m7 - rhs.m7) < epsilon) &&
+            (std::fabs(m8 - rhs.m8) < epsilon) &&
+            (std::fabs(m9 - rhs.m9) < epsilon);
     }
 }
