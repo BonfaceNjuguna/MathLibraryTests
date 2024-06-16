@@ -4,6 +4,8 @@
 #include "Utils.h"
 #include "MathHeaders/Matrix3.h"
 
+#define EPSILON 0.0001f
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using ::MathClasses::Matrix3;
 using ::MathClasses::Vector3;
@@ -98,24 +100,38 @@ namespace MathLibraryTests
 		{
 			Matrix3 actual = Matrix3::MakeEuler(1.0f, 2.0f, 3.0f);
 
-			Assert::AreEqual(
+			Matrix3 expected(
+				0.411982f, -0.058727f, 0.909297f,
+				-0.833738f, -0.426918f, 0.350175f,
+				0.367630f, -0.902382f, -0.224845f);
+
+			Assert::IsTrue(expected.Equals(actual, EPSILON));
+
+			/*Assert::AreEqual(
 				Matrix3(
 					0.411982f, -0.058727f, 0.909297f,
 					-0.833738f, -0.426918f, 0.350175f,
 					0.367630f, -0.902382f, -0.224845f),
-				actual);
+				actual);*/
 		}
 		// make rot from euler (vector)
 		TEST_METHOD(MakeRotateEulerVector)
 		{
 			Matrix3 actual = Matrix3::MakeEuler(Vector3(1.0f, 2.0f, 3.0f));
 
-			Assert::AreEqual(
+			Matrix3 expected(
+				0.411982f, -0.058727f, 0.909297f,
+				-0.833738f, -0.426918f, 0.350175f,
+				0.367630f, -0.902382f, -0.224845f);
+
+			Assert::IsTrue(expected.Equals(actual, EPSILON));
+
+			/*Assert::AreEqual(
 				Matrix3(
 					0.411982f, -0.058727f, 0.909297f,
 					-0.833738f, -0.426918f, 0.350175f,
 					0.367630f, -0.902382f, -0.224845f),
-				actual);
+				actual);*/
 
 		}
 		// make scale from floats

@@ -97,24 +97,40 @@ namespace MathLibraryTests
 		{
 			Matrix4 actual = Matrix4::MakeEuler(Vector3(1.0f, 2.0f, 3.0f));
 
-			Assert::AreEqual(
+			Matrix4 expected(0.411982f, -0.058727f, 0.909297f, 0.0f,
+				-0.833738f, -0.426918f, 0.350175f, 0.0f,
+				0.367630f, -0.902382f, -0.224845f,
+				0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+
+			//with epsilon
+			Assert::IsTrue(expected.Equals(actual, 1e-5f));
+
+			/*Assert::AreEqual(
 				Matrix4(0.411982f, -0.058727f, 0.909297f, 0.0f,
 					-0.833738f, -0.426918f, 0.350175f, 0.0f,
 					0.367630f, -0.902382f, -0.224845f,
 					0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
-				actual);
+				actual);*/
 		}
 		// make rot from euler (vector)
 		TEST_METHOD(MakeRotateEulerVector)
 		{
 			Matrix4 actual = Matrix4::MakeEuler(Vector3(1.0f, 2.0f, 3.0f));
 
-			Assert::AreEqual(
+			Matrix4 expected(0.411982f, -0.058727f, 0.909297f, 0.0f,
+				-0.833738f, -0.426918f, 0.350175f, 0.0f,
+				0.367630f, -0.902382f, -0.224845f,
+				0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+
+			//with epsilon
+			Assert::IsTrue(expected.Equals(actual, 1e-5f));
+
+			/*Assert::AreEqual(
 				Matrix4(0.411982f, -0.058727f, 0.909297f, 0.0f,
 					-0.833738f, -0.426918f, 0.350175f, 0.0f,
 					0.367630f, -0.902382f, -0.224845f,
 					0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
-				actual);
+				actual);*/
 		}
 		// make scale from floats
 		TEST_METHOD(MakeScaleFloat3D)
