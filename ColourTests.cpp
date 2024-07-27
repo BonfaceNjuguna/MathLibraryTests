@@ -18,7 +18,7 @@ namespace MathLibraryTests
 		TEST_METHOD(ColourDefaultConstructor)
 		{
 			Colour actual;
-			Assert::AreEqual( Colour(0, 0, 0, 255).colour, UnitLib::BuildColour(0,0,0,255) ); 
+			Assert::AreEqual(Colour(0, 0, 0, 255).colour, UnitLib::BuildColour(0, 0, 0, 255));
 		}
 
 		// parameterized constructor
@@ -26,14 +26,14 @@ namespace MathLibraryTests
 		{
 			Colour actual{ 32, 64, 10, 255 };
 
-			Assert::AreEqual( UnitLib::BuildColour(32, 64, 10, 255), actual.colour );
+			Assert::AreEqual(UnitLib::BuildColour(32, 64, 10, 255), actual.colour);
 		}
 
 		// Check equality method
 		TEST_METHOD(ColourEqualityOperator)
 		{
 			Colour actual;
-			Assert::IsTrue( Colour(0, 0, 0, 255) == actual);
+			Assert::IsTrue(Colour(0, 0, 0, 255) == actual);
 		}
 
 		// setting r
@@ -41,9 +41,9 @@ namespace MathLibraryTests
 		{
 			Colour actual(32, 64, 10, 255);
 			actual.SetRed(128);
-			Assert::AreEqual( UnitLib::BuildColour(128, 64, 10, 255), actual.colour);
+			Assert::AreEqual(UnitLib::BuildColour(128, 64, 10, 255), actual.colour);
 		}
-		
+
 		// setting g
 		TEST_METHOD(SetGreen)
 		{
@@ -94,6 +94,26 @@ namespace MathLibraryTests
 			Colour actual(32, 64, 0, 255);
 			auto alpha = actual.GetAlpha();
 			Assert::AreEqual(alpha, (Byte)255);
+		}
+
+		// bit shifting operation
+		TEST_METHOD(BitShiftRedToGreen) 
+		{
+			// initialize color red and set to 94
+			Colour actual;
+			actual.SetRed(94);
+
+			// shift red to green position
+			actual.colour = (actual.colour & 0xff000000) >> 8;
+
+			uint32_t expectedColour = UnitLib::BuildColour(0, 94, 0, 0);
+
+			// check the binary and decimal values
+			Assert::AreEqual(expectedColour, actual.colour);
+			Assert::AreEqual(actual.GetGreen(), (Byte)94);
+			Assert::AreEqual(actual.GetRed(), (Byte)0);
+			Assert::AreEqual(actual.GetBlue(), (Byte)0);
+			Assert::AreEqual(actual.GetAlpha(), (Byte)0);
 		}
 	};
 }

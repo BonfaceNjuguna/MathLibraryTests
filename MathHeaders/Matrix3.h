@@ -16,6 +16,9 @@ namespace MathClasses
 
         static const Matrix3 identity;
 
+        // Helper function to round to a certain number of decimal places
+        static float RoundToMat3(float value, int decimalPlaces);
+
         // Matrix multiplication
         Matrix3 operator*(const Matrix3& rhs) const;
 

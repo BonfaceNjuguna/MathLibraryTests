@@ -15,6 +15,13 @@ namespace MathClasses {
     Matrix3::Matrix3(const float numbers[9])
         : m1(numbers[0]), m2(numbers[1]), m3(numbers[2]), m4(numbers[3]), m5(numbers[4]), m6(numbers[5]), m7(numbers[6]), m8(numbers[7]), m9(numbers[8]) {}
 
+    // helper function to round to a certain number of decimal places
+    float Matrix3::RoundToMat3(float value, int decimalPlaces)
+    {
+        float scale = std::pow(10.0f, decimalPlaces);
+        return std::round(value * scale) / scale;
+    }
+
     // Matrix multiplication
     Matrix3 Matrix3::operator*(const Matrix3& rhs) const {
         return Matrix3(
@@ -77,26 +84,35 @@ namespace MathClasses {
 
     // Rotation
     void Matrix3::SetRotateX(double radians) {
+        double c = std::cos(radians);
+        double s = std::sin(radians);
+
         Set(
-            1, 0, 0,
-            0, (float)std::cos(radians), -(float)std::sin(radians),
-            0, (float)std::sin(radians), (float)std::cos(radians)
+            1.0f, 0, 0,
+            0, RoundToMat3(c, 6), RoundToMat3(-s, 6),
+            0, RoundToMat3(s, 6), RoundToMat3(c, 6)
         );
     }
 
     void Matrix3::SetRotateY(double radians) {
+        double c = std::cos(radians);
+        double s = std::sin(radians);
+
         Set(
-            (float)std::cos(radians), 0, (float)std::sin(radians),
-            0, 1, 0,
-            -(float)std::sin(radians), 0, (float)std::cos(radians)
+            RoundToMat3(c, 6), 0, RoundToMat3(s, 6),
+            0, 1.0f, 0,
+            RoundToMat3(-s, 6), 0, RoundToMat3(c, 6)
         );
     }
 
     void Matrix3::SetRotateZ(double radians) {
+        double c = std::cos(radians);
+        double s = std::sin(radians);
+
         Set(
-            (float)std::cos(radians), (float)std::sin(radians), 0,
-            -(float)std::sin(radians), (float)std::cos(radians), 0,
-            0, 0, 1
+            RoundToMat3(c, 6), RoundToMat3(s, 6), 0,
+            RoundToMat3(-s, 6), RoundToMat3(c, 6), 0,
+            0, 0, 1.0f
         );
     }
 
@@ -120,10 +136,16 @@ namespace MathClasses {
 
     void Matrix3::SetRotated(float pitch, float yaw, float roll) {
         Matrix3 x, y, z;
-        x.SetRotateX(pitch);
-        y.SetRotateY(yaw);
-        z.SetRotateZ(roll);
-        Set(z * y * x);
+        x.SetRotateX(static_cast<double>(pitch));
+        y.SetRotateY(static_cast<double>(yaw));
+        z.SetRotateZ(static_cast<double>(roll));
+
+        Matrix3 result = z * y * x;
+
+        // Consistent rounding applied to final results
+        m1 = RoundToMat3(result.m1, 6); m2 = RoundToMat3(result.m2, 6); m3 = RoundToMat3(result.m3, 6);
+        m4 = RoundToMat3(result.m4, 6); m5 = RoundToMat3(result.m5, 6); m6 = RoundToMat3(result.m6, 6);
+        m7 = RoundToMat3(result.m7, 6); m8 = RoundToMat3(result.m8, 6); m9 = RoundToMat3(result.m9, 6);
     }
 
     // Translation
@@ -179,7 +201,7 @@ namespace MathClasses {
 
     Matrix3 Matrix3::MakeRotateX(float radians) {
         Matrix3 m;
-        m.SetRotateX(radians);
+        m.SetRotateX(static_cast<double>(radians));
         return m;
     }
 
@@ -231,18 +253,5 @@ namespace MathClasses {
         return m1 == rhs.m1 && m2 == rhs.m2 && m3 == rhs.m3 &&
             m4 == rhs.m4 && m5 == rhs.m5 && m6 == rhs.m6 &&
             m7 == rhs.m7 && m8 == rhs.m8 && m9 == rhs.m9;
-    }
-
-    // eplison for float comparison
-    bool Matrix3::Equals(const Matrix3& rhs, float epsilon) const {
-        return (std::fabs(m1 - rhs.m1) < epsilon) &&
-            (std::fabs(m2 - rhs.m2) < epsilon) &&
-            (std::fabs(m3 - rhs.m3) < epsilon) &&
-            (std::fabs(m4 - rhs.m4) < epsilon) &&
-            (std::fabs(m5 - rhs.m5) < epsilon) &&
-            (std::fabs(m6 - rhs.m6) < epsilon) &&
-            (std::fabs(m7 - rhs.m7) < epsilon) &&
-            (std::fabs(m8 - rhs.m8) < epsilon) &&
-            (std::fabs(m9 - rhs.m9) < epsilon);
     }
 }

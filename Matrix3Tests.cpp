@@ -34,9 +34,9 @@ namespace MathLibraryTests
 		// parameterized constructor (individual)
 		TEST_METHOD(ConstructorParamFloats)
 		{
-			Matrix3 mat(1.f,2.f,3.f,
-				4.f,5.f,6.f,
-				7.f,8.f,9.f);
+			Matrix3 mat(1.f, 2.f, 3.f,
+				4.f, 5.f, 6.f,
+				7.f, 8.f, 9.f);
 
 			Assert::AreEqual(1.f, mat.m1);
 			Assert::AreEqual(2.f, mat.m2);
@@ -131,18 +131,18 @@ namespace MathLibraryTests
 //	TEST_CLASS(Matrix3OptionalTests)
 //	{
 //		TEST_METHOD(SubscriptReference) {
-//			Matrix3 m3a(1, 4, 1, 
-//						2, 3, 2, 
-//						3, 2, 3);
+//			Matrix3 m3a(1, 4, 1,
+//				2, 3, 2,
+//				3, 2, 3);
 //
 //			Assert::AreEqual(m3a[0], 1.f);
 //			Assert::AreEqual(m3a[1], 4.f);
 //			Assert::AreEqual(m3a[2], 1.f);
-//				
+//
 //			Assert::AreEqual(m3a[3], 2.f);
 //			Assert::AreEqual(m3a[4], 3.f);
 //			Assert::AreEqual(m3a[5], 2.f);
-//				
+//
 //			Assert::AreEqual(m3a[6], 3.f);
 //			Assert::AreEqual(m3a[7], 2.f);
 //			Assert::AreEqual(m3a[8], 3.f);
@@ -173,11 +173,11 @@ namespace MathLibraryTests
 //			Assert::AreEqual(p[0], 1.f);
 //			Assert::AreEqual(p[1], 4.f);
 //			Assert::AreEqual(p[2], 1.f);
-//							 
+//
 //			Assert::AreEqual(p[3], 2.f);
 //			Assert::AreEqual(p[4], 3.f);
 //			Assert::AreEqual(p[5], 2.f);
-//							 
+//
 //			Assert::AreEqual(p[6], 3.f);
 //			Assert::AreEqual(p[7], 2.f);
 //			Assert::AreEqual(p[8], 3.f);
@@ -186,11 +186,11 @@ namespace MathLibraryTests
 //			Assert::AreEqual(q[0], 1.f);
 //			Assert::AreEqual(q[1], 4.f);
 //			Assert::AreEqual(q[2], 1.f);
-//			
+//
 //			Assert::AreEqual(q[3], 2.f);
 //			Assert::AreEqual(q[4], 3.f);
 //			Assert::AreEqual(q[5], 2.f);
-//			
+//
 //			Assert::AreEqual(q[6], 3.f);
 //			Assert::AreEqual(q[7], 2.f);
 //			Assert::AreEqual(q[8], 3.f);

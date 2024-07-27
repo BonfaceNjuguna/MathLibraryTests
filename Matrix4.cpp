@@ -88,6 +88,13 @@ namespace MathClasses
 		return !(*this == rhs);
 	}
 
+	// Helper function to round to a certain number of decimal places
+	float Matrix4::RoundToMat4(float value, int decimalPlaces)
+	{
+		float scale = std::pow(10.0f, decimalPlaces);
+		return std::round(value * scale) / scale;
+	}
+
 	void Matrix4::Set(const Matrix4& m)
 	{
 		m1 = m.m1; m2 = m.m2; m3 = m.m3; m4 = m.m4;
@@ -231,8 +238,8 @@ namespace MathClasses
 	{
 		return Matrix4(
 			1, 0, 0, 0,
-			0, cos(radians), -sin(radians), 0,
-			0, sin(radians), cos(radians), 0,
+			0, RoundToMat4(static_cast<float>(cos(radians)), 6), RoundToMat4(static_cast<float>(-sin(radians)), 6), 0,
+			0, RoundToMat4(static_cast<float>(sin(radians)), 6), RoundToMat4(static_cast<float>(cos(radians)), 6), 0,
 			0, 0, 0, 1
 		);
 	}
@@ -240,9 +247,9 @@ namespace MathClasses
 	Matrix4 Matrix4::MakeRotateY(float radians)
 	{
 		return Matrix4(
-			cos(radians), 0, sin(radians), 0,
+			RoundToMat4(static_cast<float>(cos(radians)), 6), 0, RoundToMat4(static_cast<float>(sin(radians)), 6), 0,
 			0, 1, 0, 0,
-			-sin(radians), 0, cos(radians), 0,
+			RoundToMat4(static_cast<float>(-sin(radians)), 6), 0, RoundToMat4(static_cast<float>(cos(radians)), 6), 0,
 			0, 0, 0, 1
 		);
 	}
@@ -250,8 +257,8 @@ namespace MathClasses
 	Matrix4 Matrix4::MakeRotateZ(float radians)
 	{
 		return Matrix4(
-			cos(radians), sin(radians), 0, 0,
-			-sin(radians), cos(radians), 0, 0,
+			RoundToMat4(static_cast<float>(cos(radians)), 6), RoundToMat4(static_cast<float>(sin(radians)), 6), 0, 0,
+			RoundToMat4(static_cast<float>(-sin(radians)), 6), RoundToMat4(static_cast<float>(cos(radians)), 6), 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1
 		);
@@ -281,9 +288,9 @@ namespace MathClasses
 		float m22 = cp * cy;
 
 		return Matrix4(
-			m00, m01, -m02, 0.0f,
-			m10, m11, -m12, 0.0f,
-			-m20, -m21, m22, 0.0f,
+			RoundToMat4(static_cast<float>(m00), 6), RoundToMat4(static_cast<float>(m01), 6), RoundToMat4(static_cast<float>(-m02), 6), 0.0f,
+			RoundToMat4(static_cast<float>(m10), 6), RoundToMat4(static_cast<float>(m11), 6), RoundToMat4(static_cast<float>(-m12), 6), 0.0f,
+			RoundToMat4(static_cast<float>(-m20), 6), RoundToMat4(static_cast<float>(-m21), 6), RoundToMat4(static_cast<float>(m22), 6), 0.0f,
 			0.0f, 0.0f, 0.0f, 1.0f
 		);
 	}
@@ -306,26 +313,6 @@ namespace MathClasses
 	Matrix4 Matrix4::MakeScale(const Vector3& v)
 	{
 		return MakeScale(v.x, v.y, v.z);
-	}
-
-	bool MathClasses::Matrix4::Equals(const Matrix4& other, float epsilon) const
-	{
-		return (fabs(m1 - other.m1) < epsilon &&
-			fabs(m2 - other.m2) < epsilon &&
-			fabs(m3 - other.m3) < epsilon &&
-			fabs(m4 - other.m4) < epsilon &&
-			fabs(m5 - other.m5) < epsilon &&
-			fabs(m6 - other.m6) < epsilon &&
-			fabs(m7 - other.m7) < epsilon &&
-			fabs(m8 - other.m8) < epsilon &&
-			fabs(m9 - other.m9) < epsilon &&
-			fabs(m10 - other.m10) < epsilon &&
-			fabs(m11 - other.m11) < epsilon &&
-			fabs(m12 - other.m12) < epsilon &&
-			fabs(m13 - other.m13) < epsilon &&
-			fabs(m14 - other.m14) < epsilon &&
-			fabs(m15 - other.m15) < epsilon &&
-			fabs(m16 - other.m16) < epsilon);
 	}
 
 	std::string Matrix4::ToString() const
